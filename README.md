@@ -2,3 +2,4 @@
 
 ## Members:
 Xavier González Mur: xgonzalezmur@gmail.com
+Ivan Margarit Sanchez: ivano.es@gmail.com
