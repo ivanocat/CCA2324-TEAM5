@@ -4,4 +4,4 @@ A terraform module to set up remote state management with S3 backend for your ac
 
 Based on source: https://github.com/nozaq/terraform-aws-remote-state-s3-backend
 
-:warning: <font color="red">**WARNING:**</font> No need to apply it, since the initial commiter of this file already created the S3 and the DynamoDB table.
+:warning: **WARNING:** No need to apply it, since the initial commiter of this file already created the S3 and the DynamoDB table.

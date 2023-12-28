@@ -24,6 +24,6 @@ If not done previously, create a remote backend for the Terraform state locking 
 
 
 ## Expected infrastructure
-The following image shows the infrastructre that comprises the project:
+The following image shows the infrastructure that comprises the project:
 
-<center>(TBC)</center>
+![Infrastructure of the project](../images/Infrastructure.drawio.png "Infrastructure of the project")
