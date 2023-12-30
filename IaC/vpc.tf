@@ -60,6 +60,10 @@ resource "aws_internet_gateway" "igw" {
 # Elastic IP for the NAT Gateway
 resource "aws_eip" "eip_natgw" {
   vpc = true
+
+  tags = {
+    Name = "${var.prefix}-eip"
+  }
 }
 
 # NAT Gateway (Only one for all public subnets)
@@ -188,7 +192,7 @@ resource "aws_security_group" "app" {
 
 # Data ingress ports to be determined
 resource "aws_security_group" "data" {
-  name        = "data_sg"
+  name        = "data-sg"
   description = "Allow traffic only from app-sg"
   vpc_id      = aws_vpc.vpc.id
 
