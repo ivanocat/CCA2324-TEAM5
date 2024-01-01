@@ -4,19 +4,25 @@ If not done previously, create a remote backend for the Terraform state locking 
 
 ## Steps
 
-1. Initialize the working directory containing Terraform configuration files:
+1. Clone the repository in our AWS account. This account is provate, so we need the authorization of the owners to clone the repository. 
+
+```bash
+    git clone https://github.com/ivanocat/CCA2324-TEAM5.git
+```
+
+2. Initialize the working directory containing Terraform configuration files:
 
 ```bash
     terraform init
 ```
 
-2. Preview the changes that Terraform plans to make to the infrastructure:
+3. Preview the changes that Terraform plans to make to the infrastructure:
 
 ```bash
     terraform plan
 ```
 
-3. Execute the actions proposed in a Terraform plan. The `-auto-approve` flag skips interactive approval of plan before applying:
+4. Execute the actions proposed in a Terraform plan. The `-auto-approve` flag skips interactive approval of plan before applying:
 
 ```bash
     terraform apply -auto-approve
