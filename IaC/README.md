@@ -13,6 +13,7 @@ If not done previously, create a remote backend for the Terraform state locking 
 2. Initialize the working directory containing Terraform configuration files:
 
 ```bash
+    cd CCA2324-TEAM5/IaC/init-backend
     terraform init
 ```
 
