@@ -16,7 +16,7 @@ resource "aws_launch_template" "application_lt" {
     security_groups             = [aws_security_group.web.id]
   }
 
-  user_data = base64encode()
+  user_data = filebase64("./scripts/ec2-userdata.sh")
 
 }
 
