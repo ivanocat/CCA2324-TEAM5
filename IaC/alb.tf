@@ -7,11 +7,11 @@ resource "aws_alb" "application_load_balancer" {
   security_groups = [module.web_sg.security_group_id]
 
   tags = {
-      Name        = "${var.prefix}-alb"
-      Environment = "dev",
-      Owner       = "Team 5"
-      Project     = "CCA2324-PFP"
-    }
+    Name        = "${var.prefix}-alb"
+    Environment = "dev",
+    Owner       = "Team 5"
+    Project     = "CCA2324-PFP"
+  }
 }
 
 resource "aws_alb_target_group" "alb_tg" {
@@ -34,11 +34,11 @@ resource "aws_alb_target_group" "alb_tg" {
   load_balancing_algorithm_type = "round_robin"
 
   tags = {
-      Name        = "${var.prefix}-alb-target-group"
-      Environment = "dev",
-      Owner       = "Team 5",
-      Project     = "CCA2324-PFP"
-    }
+    Name        = "${var.prefix}-alb-target-group"
+    Environment = "dev",
+    Owner       = "Team 5",
+    Project     = "CCA2324-PFP"
+  }
 }
 
 resource "aws_alb_listener" "application_listener" {

@@ -5,9 +5,9 @@ module "vpc" {
   cidr = "172.31.0.0/16"
 
   azs              = ["${var.region}a", "${var.region}b"]
-  public_subnets   = ["172.31.0.0/24", "172.31.1.0/24"]
-  private_subnets  = ["172.31.10.0/24", "172.31.11.0/24"]
-  database_subnets = ["172.31.12.0/24", "172.31.13.0/24"]
+  public_subnets   = ["172.31.1.0/24", "172.31.2.0/24"]
+  private_subnets  = ["172.31.11.0/24", "172.31.12.0/24"]
+  database_subnets = ["172.31.21.0/24", "172.31.22.0/24"]
 
   enable_vpn_gateway = true
 
