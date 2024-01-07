@@ -10,6 +10,18 @@ variable "region" {
   default     = "us-east-1"
 }
 
+variable "vpc-cidr" {
+  description = "The address range of the VPC"
+  type        = string
+  default     = "172.31.0.0/16"
+}
+
+variable "min-az" {
+  description = "The minimum AZ to be used"
+  type        = number
+  default     = 2
+}
+
 variable "domain" {
   description = "Domain reserved at https://dnsexit.com/"
   type        = string

@@ -1,19 +1,19 @@
 locals {
   asg_tags = { 
-    Name = "dev-pfp-team5-asg"
+    Name = "${var.prefix}-asg"
     }
 }
 
 
 resource "aws_launch_template" "application_lt" {
-  name_prefix   = "dev-pfp-team5-launch_template"
+  name_prefix   = "${var.prefix}-launch_template"
   image_id      = "ami-079db87dc4c10ac91"
   instance_type = "t2.micro"
 
 
   network_interfaces {
     associate_public_ip_address = true
-    security_groups             = [aws_security_group.web.id]
+    security_groups             = [module.web_sg.security_group_id]
   }
 
   user_data = filebase64("./scripts/ec2-userdata.sh")
@@ -21,11 +21,11 @@ resource "aws_launch_template" "application_lt" {
 }
 
 resource "aws_autoscaling_group" "application_asg" {
-  name                = "dev-pfp-team5-asg"
+  name                = "${var.prefix}-asg"
   max_size            = 3
   min_size            = 1
   desired_capacity    = 1
-  vpc_zone_identifier = [for subnet in aws_subnet.private : subnet.id]
+  vpc_zone_identifier = module.vpc.private_subnets
 
   launch_template {
     id      = aws_launch_template.application_lt.id
@@ -49,7 +49,7 @@ resource "aws_autoscaling_group" "application_asg" {
 }
 
 resource "aws_autoscaling_policy" "cpu_scaling_policy" {
-  name                   = "dev-pfp-team5-cpu-scaling-policy"
+  name                   = "${var.prefix}-cpu-scaling-policy"
   policy_type            = "TargetTrackingScaling"
   estimated_instance_warmup = 10 //optional. Without a value, AWS will default to the group's specified cooldown period (300s).
   autoscaling_group_name = aws_autoscaling_group.application_asg.name

@@ -1,13 +1,13 @@
 resource "aws_alb" "application_load_balancer" {
-  name               = "dev-pfp-team5-alb"
+  name               = "${var.prefix}-alb"
   internal           = false
   load_balancer_type = "application"
 
-  subnets         = [for subnet in aws_subnet.public : subnet.id]
-  security_groups = [aws_security_group.web.id]
+  subnets         = module.vpc.public_subnets
+  security_groups = [module.web_sg.security_group_id]
 
   tags = {
-      Name        = "pfp-team5-alb"
+      Name        = "${var.prefix}-alb"
       Environment = "dev",
       Owner       = "Team 5"
       Project     = "CCA2324-PFP"
@@ -18,7 +18,7 @@ resource "aws_alb_target_group" "alb_tg" {
   name_prefix = "alb-tg"
   port        = "80"
   protocol    = "HTTP"
-  vpc_id      = aws_vpc.vpc.id
+  vpc_id      = module.vpc.vpc_id
   target_type = "instance"
 
   health_check {
@@ -34,7 +34,7 @@ resource "aws_alb_target_group" "alb_tg" {
   load_balancing_algorithm_type = "round_robin"
 
   tags = {
-      Name        = "dev-pfp-team5-alb-target-group"
+      Name        = "${var.prefix}-alb-target-group"
       Environment = "dev",
       Owner       = "Team 5",
       Project     = "CCA2324-PFP"
