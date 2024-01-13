@@ -59,3 +59,42 @@ module "data_sg" {
     Project     = "CCA2324-PFP"
   }
 }
+
+module "monitoring_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+
+  name        = "${var.prefix}-monitoring-sg"
+  description = "Allow TCP ports for Monitoring"
+  vpc_id      = module.vpc.vpc_id
+
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 9090
+      to_port     = 9090
+      protocol    = "tcp"
+      description = "Prometheus Server"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      from_port   = 3000
+      to_port     = 3000
+      protocol    = "tcp"
+      description = "Grafana"
+      cidr_blocks = "0.0.0.0/0"
+    },
+    {
+      from_port   = 9100
+      to_port     = 9100
+      protocol    = "tcp"
+      description = "Prometheus Node Exporter"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+    Owner       = "Team 5"
+    Project     = "CCA2324-PFP"
+  }
+}
