@@ -1,23 +1,20 @@
 locals {
-  asg_tags = { 
+  asg_tags = {
     Name = "${var.prefix}-asg"
-    }
+  }
 }
-
 
 resource "aws_launch_template" "application_lt" {
   name_prefix   = "${var.prefix}-launch_template"
   image_id      = "ami-079db87dc4c10ac91"
   instance_type = "t2.micro"
 
-
   network_interfaces {
-    associate_public_ip_address = true
-    security_groups             = [module.web_sg.security_group_id]
+    associate_public_ip_address = false
+    security_groups             = [module.app_sg.security_group_id]
   }
 
   user_data = filebase64("./scripts/ec2-userdata.sh")
-
 }
 
 resource "aws_autoscaling_group" "application_asg" {
@@ -44,15 +41,13 @@ resource "aws_autoscaling_group" "application_asg" {
       propagate_at_launch = true
     }
   }
-
-
 }
 
 resource "aws_autoscaling_policy" "cpu_scaling_policy" {
-  name                   = "${var.prefix}-cpu-scaling-policy"
-  policy_type            = "TargetTrackingScaling"
+  name                      = "${var.prefix}-cpu-scaling-policy"
+  policy_type               = "TargetTrackingScaling"
   estimated_instance_warmup = 10 //optional. Without a value, AWS will default to the group's specified cooldown period (300s).
-  autoscaling_group_name = aws_autoscaling_group.application_asg.name
+  autoscaling_group_name    = aws_autoscaling_group.application_asg.name
 
   target_tracking_configuration {
     predefined_metric_specification {
@@ -62,7 +57,6 @@ resource "aws_autoscaling_policy" "cpu_scaling_policy" {
     target_value = 50
   }
 }
-
 
 resource "aws_autoscaling_attachment" "application_asg_attachment" {
   autoscaling_group_name = aws_autoscaling_group.application_asg.name

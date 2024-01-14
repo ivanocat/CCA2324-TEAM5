@@ -32,6 +32,3 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-
-# Ignore the S3 backend identifier of providewrs.tf
-providers.tf
