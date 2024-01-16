@@ -8,6 +8,13 @@ module "web_sg" {
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "all-icmp"]
 
+  egress_with_cidr_blocks = [
+    {
+      rule        = "all-all"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+
   tags = {
     Terraform   = "true"
     Environment = "dev"
@@ -30,6 +37,13 @@ module "app_sg" {
     }
   ]
 
+  egress_with_cidr_blocks = [
+    {
+      rule        = "all-all"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+
   tags = {
     Terraform   = "true"
     Environment = "dev"
@@ -49,6 +63,13 @@ module "data_sg" {
     {
       rule                     = "all-all"
       source_security_group_id = module.app_sg.security_group_id
+    }
+  ]
+
+  egress_with_cidr_blocks = [
+    {
+      rule        = "all-all"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
 
