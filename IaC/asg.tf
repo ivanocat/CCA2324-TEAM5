@@ -10,7 +10,7 @@ resource "aws_launch_template" "application_lt" {
   instance_type = "t2.micro"
 
   network_interfaces {
-    associate_public_ip_address = false
+    associate_public_ip_address = true
     security_groups             = [module.app_sg.security_group_id]
   }
 
