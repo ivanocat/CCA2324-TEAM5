@@ -17,6 +17,19 @@ resource "aws_launch_template" "application_lt" {
   user_data = filebase64("./scripts/ec2-userdata.sh")
 }
 
+resource "aws_launch_template" "odoo_16_lt" {
+  name_prefix   = "${var.prefix}-launch_template"
+  image_id      = "ami-05d47d29a4c2d19e1"
+  instance_type = "t2.micro"
+
+  network_interfaces {
+    associate_public_ip_address = false
+    security_groups             = [module.app_sg.security_group_id]
+  }
+
+  user_data = filebase64("./scripts/ec2-odoo.sh")
+}
+
 resource "aws_autoscaling_group" "application_asg" {
   name                = "${var.prefix}-asg"
   max_size            = 3
