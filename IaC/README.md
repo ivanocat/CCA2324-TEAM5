@@ -28,6 +28,12 @@ If not done previously, create a remote backend for the Terraform state locking 
 ```bash
     terraform apply -auto-approve
 ```
+5. Execute the actions proposed in a Terraform plan to destroy the infrastructure that was previously created. The -auto-approve flag is used to skip the interactive approval step before applying the destruction plan. This command will remove all the resources managed by Terraform:
+
+```bash
+    terraform apply -auto-approve
+```
+
 
 
 ## Expected infrastructure

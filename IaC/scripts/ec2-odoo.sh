@@ -1,33 +1,33 @@
 #!/bin/bash
 
-# Actualizar el sistema
+# Update the system
 sudo apt update -y
 sudo apt upgrade -y
 
-# Instalar dependencias necesarias
+# Install necessary dependencies
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
 
-# Agregar la clave GPG oficial de Docker
+# Add Docker's official GPG key
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-# Configurar el repositorio estable de Docker
+# Configure the Docker stable repository
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-# Actualizar el índice de paquetes
+# Update package index
 sudo apt update -y
 
-# Instalar Docker y Docker Compose
+# Install Docker and Docker Compose
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose
 
-# Iniciar y habilitar el servicio Docker
+# Start and enable the Docker service
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# Crear un directorio para los archivos de configuración de Docker Compose
+# Create a directory for Docker Compose configuration files
 mkdir ~/odoo-docker
 cd ~/odoo-docker
 
-# Crear un archivo docker-compose.yml con el contenido proporcionado
+# Create a docker-compose.yml file with the provided content
 echo "version: '3.1'
 services:
   web:
@@ -44,13 +44,13 @@ services:
       - POSTGRES_USER=odoo
 " > docker-compose.yml
 
-# Iniciar los contenedores con Docker Compose sin solicitar confirmación
+# Start the containers with Docker Compose without prompting for confirmation
 sudo docker-compose up -d
 
-# Configurar Nginx en el sistema host
+# Configure Nginx on the host system
 sudo apt install -y nginx
 
-# Crear un archivo de configuración para Nginx
+# Create a configuration file for Nginx
 echo "server {
     listen 80;
     server_name localhost;
@@ -64,8 +64,8 @@ echo "server {
     }
 }" | sudo tee /etc/nginx/sites-available/odoo > /dev/null
 
-# Crear un enlace simbólico al archivo de configuración
+# Create a symbolic link to the configuration file
 sudo ln -s /etc/nginx/sites-available/odoo /etc/nginx/sites-enabled/
 
-# Reiniciar Nginx para aplicar los cambios
+# Restart Nginx to apply the changes
 sudo systemctl restart nginx
