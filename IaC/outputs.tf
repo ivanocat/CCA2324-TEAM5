@@ -24,7 +24,7 @@ output "load_balancer_dns_name" {
 }
 
 output "alb_target_group_arn" {
-  description = "ALB Target Grouparn"
+  description = "ALB target group arn"
   value       = aws_alb_target_group.alb_tg.arn
 }
 
