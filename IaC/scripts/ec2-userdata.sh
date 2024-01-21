@@ -1,24 +1,24 @@
 #!/bin/bash
 
-# Actualizar el sistema
+# Update the system
 sudo yum update -y
 
-# Instalar dependencias
+# Install dependencies
 sudo yum install -y docker
 
-# Iniciar y habilitar el servicio Docker
+# Start and enable the Docker service
 sudo systemctl start docker
 sudo systemctl enable docker
 
-# Instalar Docker Compose
+# Install Docker Compose
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-# Crear un directorio para los archivos de configuración de Docker Compose
+# Create a directory for Docker Compose configuration files
 mkdir ~/odoo-docker
 cd ~/odoo-docker
 
-# Crear un archivo docker-compose.yml con el contenido proporcionado
+# Create a docker-compose.yml file with the provided content
 echo "version: '3.1'
 services:
   web:
@@ -35,13 +35,13 @@ services:
       - POSTGRES_USER=odoo
 " > docker-compose.yml
 
-# Iniciar los contenedores con Docker Compose sin solicitar confirmación
+# Start the containers with Docker Compose without prompting for confirmation
 sudo docker-compose up -d
 
-# Instalar Nginx
+# Install Nginx
 sudo yum install -y nginx
 
-# Configurar Nginx en el sistema host
+# Configure Nginx on the host system
 echo "server {
     listen 80;
     server_name localhost;
@@ -55,5 +55,5 @@ echo "server {
     }
 }" | sudo tee /etc/nginx/conf.d/odoo.conf > /dev/null
 
-# Reiniciar Nginx para aplicar los cambios
+# Restart Nginx to apply the changes
 sudo systemctl restart nginx
