@@ -10,8 +10,8 @@ resource "aws_launch_template" "application_lt" {
   instance_type = "t2.micro"
 
   network_interfaces {
-    associate_public_ip_address = true
-    security_groups             = [module.app_sg.security_group_id]
+    associate_public_ip_address = false
+    security_groups             = [module.app_sg.security_group_id,monitoring_sg.security_group_id]
   }
 
   user_data = filebase64("./scripts/ec2-userdata.sh")
@@ -22,7 +22,7 @@ resource "aws_autoscaling_group" "application_asg" {
   max_size            = 3
   min_size            = 1
   desired_capacity    = 1
-  vpc_zone_identifier = module.vpc.public_subnets
+  vpc_zone_identifier = module.vpc.private_subnets
 
   launch_template {
     id      = aws_launch_template.application_lt.id
