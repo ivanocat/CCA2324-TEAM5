@@ -18,8 +18,14 @@ global:
     monitor: 'prometheus'
 scrape_configs:
   - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9100']
+    sample_limit: 10000
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 9100
+        filters:
+          - name: tag:Name
+            values:
+              - pfp-asg
 EOF
 sudo cp prometheus.yml /etc/prometheus/prometheus.yml
 rm prometheus.yml
