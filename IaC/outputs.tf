@@ -18,23 +18,13 @@ output "data_subnets_id" {
   value       = module.vpc.database_subnets
 }
 
-output "route53_zone_id" {
-  description = "Route53 host zone id"
-  value       = module.zones.route53_zone_zone_id
-}
-
-output "route53_record_name" {
-  description = "Route53 route name"
-  value       = module.records.route53_record_name
-}
-
 output "load_balancer_dns_name" {
   description = "LoadBalancer dns name"
   value       = aws_alb.application_load_balancer.dns_name
 }
 
 output "alb_target_group_arn" {
-  description = "ALB Target Grouparn"
+  description = "ALB target group arn"
   value       = aws_alb_target_group.alb_tg.arn
 }
 
