@@ -8,7 +8,7 @@ terraform {
 
   # Note: A backend block cannot refer to named values
   backend "s3" {
-    bucket         = "tf-remote-state20240105183740884600000001"
+    bucket         = "tf-remote-state20240120181736772000000001"
     key            = "pfp-vpc"
     dynamodb_table = "tf-remote-state-lock"
     region         = "us-east-1"
