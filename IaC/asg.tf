@@ -6,8 +6,18 @@ locals {
 
 resource "aws_launch_template" "application_lt" {
   name_prefix   = "${var.prefix}-launch_template"
-  image_id      = "ami-079db87dc4c10ac91"
-  instance_type = "t2.micro"
+  image_id      = "ami-0a3c3a20c09d6f377" // Amazon Linux 2023 AMI (64-bit (x86), uefi-preferred)
+  instance_type = "t3.medium"
+
+  // EC2 role
+  iam_instance_profile {
+    name = "LabInstanceProfile"
+  }
+
+  // Detailed monitoring
+  monitoring {
+    enabled = true
+  }
 
   network_interfaces {
     associate_public_ip_address = false
