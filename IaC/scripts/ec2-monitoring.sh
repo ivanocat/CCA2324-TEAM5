@@ -1,5 +1,7 @@
 #!/bin/bash
 # Use this for your user data (script from top to bottom)
+
+# Install prometheus - BEGIN
 sudo useradd --no-create-home prometheus
 sudo mkdir /etc/prometheus
 sudo mkdir /var/lib/prometheus
@@ -57,4 +59,15 @@ sudo chown -R prometheus:prometheus /var/lib/prometheus
 sudo systemctl daemon-reload
 sudo systemctl enable prometheus
 sudo systemctl start prometheus
-sudo systemctl status prometheus
+# Install prometheus - END
+
+# Install grafana - BEGIN
+sudo apt update
+sudo apt-get install -y adduser libfontconfig1 musl
+wget https://dl.grafana.com/oss/release/grafana_10.3.1_amd64.deb
+sudo dpkg -i grafana_10.3.1_amd64.deb
+sudo systemctl daemon-reload
+sudo systemctl start grafana-server
+sudo systemctl status grafana-server
+sudo systemctl enable grafana-server.service
+# Install grafana - END
