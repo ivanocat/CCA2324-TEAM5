@@ -1,6 +1,5 @@
 #!/bin/bash
 # Use this for your user data (script from top to bottom)
-
 # Install prometheus - BEGIN
 sudo useradd --no-create-home prometheus
 sudo mkdir /etc/prometheus
@@ -60,7 +59,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable prometheus
 sudo systemctl start prometheus
 # Install prometheus - END
-
 # Install grafana - BEGIN
 sudo apt update
 sudo apt-get install -y adduser libfontconfig1 musl

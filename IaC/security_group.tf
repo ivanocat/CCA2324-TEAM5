@@ -37,6 +37,16 @@ module "app_sg" {
     }
   ]
 
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 9100
+      to_port     = 9100
+      protocol    = "tcp"
+      description = "Prometheus Node Exporter"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
+
   egress_with_cidr_blocks = [
     {
       rule        = "all-all"
@@ -104,10 +114,10 @@ module "monitoring_sg" {
       cidr_blocks = "0.0.0.0/0"
     },
     {
-      from_port   = 9100
-      to_port     = 9100
+      from_port   = 22
+      to_port     = 22
       protocol    = "tcp"
-      description = "Prometheus Node Exporter"
+      description = "Grafana"
       cidr_blocks = "0.0.0.0/0"
     }
   ]
