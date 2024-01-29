@@ -73,7 +73,9 @@ module "data_sg" {
     {
       rule                     = "all-all"
       source_security_group_id = module.app_sg.security_group_id
-    },
+    }
+  ]
+  ingress_with_cidr_blocks = [
     {
       from_port   = 5432
       to_port     = 5432
