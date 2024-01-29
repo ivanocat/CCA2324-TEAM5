@@ -75,49 +75,19 @@ module "data_sg" {
       source_security_group_id = module.app_sg.security_group_id
     }
   ]
+  ingress_with_cidr_blocks = [
+    {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      description = "PostgreSQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
+    }
+  ]
 
   egress_with_cidr_blocks = [
     {
       rule        = "all-all"
-      cidr_blocks = "0.0.0.0/0"
-    }
-  ]
-
-  tags = {
-    Terraform   = "true"
-    Environment = "dev"
-    Owner       = "Team 5"
-    Project     = "CCA2324-PFP"
-  }
-}
-
-module "monitoring_sg" {
-  source = "terraform-aws-modules/security-group/aws"
-
-  name        = "${var.prefix}-monitoring-sg"
-  description = "Allow TCP ports for Monitoring"
-  vpc_id      = module.vpc.vpc_id
-
-  ingress_with_cidr_blocks = [
-    {
-      from_port   = 9090
-      to_port     = 9090
-      protocol    = "tcp"
-      description = "Prometheus Server"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 3000
-      to_port     = 3000
-      protocol    = "tcp"
-      description = "Grafana"
-      cidr_blocks = "0.0.0.0/0"
-    },
-    {
-      from_port   = 22
-      to_port     = 22
-      protocol    = "tcp"
-      description = "Grafana"
       cidr_blocks = "0.0.0.0/0"
     }
   ]
