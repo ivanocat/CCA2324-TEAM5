@@ -73,6 +73,13 @@ module "data_sg" {
     {
       rule                     = "all-all"
       source_security_group_id = module.app_sg.security_group_id
+    },
+    {
+      from_port   = 5432
+      to_port     = 5432
+      protocol    = "tcp"
+      description = "PostgreSQL access from within VPC"
+      cidr_blocks = module.vpc.vpc_cidr_block
     }
   ]
 
