@@ -4,21 +4,21 @@ variable "rules" {
     {
       name                                     = "AWS-AWSManagedRulesCommonRuleSet"
       priority                                 = 0
-      managed_rule_group_statement_name        = "AWS-AWSManagedRulesCommonRuleSet"
+      managed_rule_group_statement_name        = "AWSManagedRulesCommonRuleSet"
       managed_rule_group_statement_vendor_name = "AWS"
       metric_name                              = "AWS-AWSManagedRulesCommonRuleSet"
     },
     {
       name                                     = "AWS-AWSManagedRulesLinuxRuleSet"
       priority                                 = 1
-      managed_rule_group_statement_name        = "AWS-AWSManagedRulesLinuxRuleSet"
+      managed_rule_group_statement_name        = "AWSManagedRulesLinuxRuleSet"
       managed_rule_group_statement_vendor_name = "AWS"
       metric_name                              = "AWS-AWSManagedRulesLinuxRuleSet"
     },
     {
       name                                     = "AWS-AWSManagedRulesSQLiRuleSet"
       priority                                 = 2
-      managed_rule_group_statement_name        = "AWS-AWSManagedRulesSQLiRuleSet"
+      managed_rule_group_statement_name        = "AWSManagedRulesSQLiRuleSet"
       managed_rule_group_statement_vendor_name = "AWS"
       metric_name                              = "AWS-AWSManagedRulesSQLiRuleSet"
     }
@@ -26,7 +26,7 @@ variable "rules" {
 }
 
 resource "aws_wafv2_web_acl" "waf" {
-  name        = "${var.prefix}-waf-managed-rules"
+  name        = "${var.prefix}-waf"
   description = "Managed rules for PFP"
   scope       = "REGIONAL"
 
