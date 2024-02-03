@@ -5,7 +5,7 @@ module "ec2-monitoring" {
 
   ami                         = "ami-0c7217cdde317cfec"
   instance_type               = "t3.medium"
-  key_name                    = "pfp"
+  key_name                    = aws_key_pair.kp.key_name
   monitoring                  = true
   vpc_security_group_ids      = [module.monitoring_sg.security_group_id, module.web_sg.security_group_id]
   subnet_id                   = module.vpc.public_subnets[0]
