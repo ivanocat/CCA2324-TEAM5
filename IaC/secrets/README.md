@@ -1,0 +1,1 @@
+:memo: **NOTE:** The purpose of this folder is to contain the local .pem file that is generated on every terrafrom apply, as well as any other file with sensitive data.
