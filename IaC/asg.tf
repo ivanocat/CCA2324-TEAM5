@@ -5,7 +5,7 @@ locals {
 }
 
 resource "aws_launch_template" "application_lt" {
-  name_prefix   = "${var.prefix}-launch_template"
+  name_prefix   = "${var.prefix}-launch-template"
   image_id      = "ami-0a3c3a20c09d6f377" // Amazon Linux 2023 AMI (64-bit (x86), uefi-preferred)
   instance_type = "t3.medium"
 
@@ -70,5 +70,5 @@ resource "aws_autoscaling_policy" "cpu_scaling_policy" {
 
 resource "aws_autoscaling_attachment" "application_asg_attachment" {
   autoscaling_group_name = aws_autoscaling_group.application_asg.name
-  lb_target_group_arn    = aws_alb_target_group.alb_tg.arn
+  lb_target_group_arn    = aws_alb_target_group.asg_tg.arn
 }
