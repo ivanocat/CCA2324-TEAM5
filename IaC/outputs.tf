@@ -18,19 +18,24 @@ output "data_subnets_id" {
   value       = module.vpc.database_subnets
 }
 
+output "auto_scaling_group_name" {
+  description = "Auto scaling group name"
+  value       = aws_autoscaling_group.application_asg.name
+}
+
 output "load_balancer_dns_name" {
   description = "LoadBalancer dns name"
   value       = aws_alb.application_load_balancer.dns_name
 }
 
-output "alb_target_group_arn" {
-  description = "ALB target group arn"
-  value       = aws_alb_target_group.alb_tg.arn
+output "auto_scaling_group_tg_arn" {
+  description = "ASG target group arn"
+  value       = aws_alb_target_group.asg_tg.arn
 }
 
-output "auto_scaling_group_name" {
-  description = "Auto scaling group name"
-  value       = aws_autoscaling_group.application_asg.name
+output "monitoring_tg_arn" {
+  description = "Monitoring target group arn"
+  value       = aws_alb_target_group.monitoring_tg.arn
 }
 
 output "launch_template_id" {
