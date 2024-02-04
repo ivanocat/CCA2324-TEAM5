@@ -7,6 +7,7 @@ variable "rules" {
       managed_rule_group_statement_name        = "AWSManagedRulesCommonRuleSet"
       managed_rule_group_statement_vendor_name = "AWS"
       metric_name                              = "AWS-AWSManagedRulesCommonRuleSet"
+      rule_action_override_allow               = ["EC2MetaDataSSRF_BODY"]
     },
     {
       name                                     = "AWS-AWSManagedRulesLinuxRuleSet"
@@ -14,6 +15,7 @@ variable "rules" {
       managed_rule_group_statement_name        = "AWSManagedRulesLinuxRuleSet"
       managed_rule_group_statement_vendor_name = "AWS"
       metric_name                              = "AWS-AWSManagedRulesLinuxRuleSet"
+      rule_action_override_allow               = []
     },
     {
       name                                     = "AWS-AWSManagedRulesSQLiRuleSet"
@@ -21,6 +23,7 @@ variable "rules" {
       managed_rule_group_statement_name        = "AWSManagedRulesSQLiRuleSet"
       managed_rule_group_statement_vendor_name = "AWS"
       metric_name                              = "AWS-AWSManagedRulesSQLiRuleSet"
+      rule_action_override_allow               = []
     }
   ]
 }
@@ -55,6 +58,18 @@ resource "aws_wafv2_web_acl" "waf" {
         managed_rule_group_statement {
           name        = rule.value.managed_rule_group_statement_name
           vendor_name = rule.value.managed_rule_group_statement_vendor_name
+
+          // Overriding the default value of specific rules
+          dynamic "rule_action_override" {
+            for_each = toset(rule.value.rule_action_override_allow)
+
+            content {
+              name = rule_action_override.value
+              action_to_use {
+                allow {}
+              }
+            }
+          }
         }
       }
 
