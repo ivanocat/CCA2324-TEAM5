@@ -11,7 +11,7 @@ resource "aws_launch_template" "application_lt" {
 
   // EC2 role
   iam_instance_profile {
-    name = "LabInstanceProfile"
+    name = var.lab_instance_role
   }
 
   // Detailed monitoring

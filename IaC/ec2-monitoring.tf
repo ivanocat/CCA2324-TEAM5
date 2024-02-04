@@ -10,7 +10,7 @@ module "ec2-monitoring" {
   vpc_security_group_ids      = [module.monitoring_sg.security_group_id, module.web_sg.security_group_id]
   subnet_id                   = module.vpc.public_subnets[0]
   associate_public_ip_address = true
-  iam_instance_profile        = "LabInstanceProfile"
+  iam_instance_profile        = var.lab_instance_role
 
   user_data = filebase64("./scripts/ec2-monitoring.sh")
 

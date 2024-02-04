@@ -15,3 +15,9 @@ variable "domain" {
   type        = string
   default     = "cca2324-team5.work.gd"
 }
+
+variable "lab_instance_role" {
+  description = "IAM instance profile role"
+  type        = string
+  default     = "LabInstanceProfile"
+}
