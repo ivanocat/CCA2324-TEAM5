@@ -7,7 +7,7 @@ variable "rules" {
       managed_rule_group_statement_name        = "AWSManagedRulesCommonRuleSet"
       managed_rule_group_statement_vendor_name = "AWS"
       metric_name                              = "AWS-AWSManagedRulesCommonRuleSet"
-      rule_action_override_allow               = ["EC2MetaDataSSRF_BODY"]
+      rule_action_override_allow               = ["EC2MetaDataSSRF_BODY", "SizeRestrictions_BODY"]
     },
     {
       name                                     = "AWS-AWSManagedRulesLinuxRuleSet"
