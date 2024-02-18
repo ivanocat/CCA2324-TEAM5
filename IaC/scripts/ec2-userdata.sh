@@ -31,11 +31,14 @@ cd ~/odoo-docker/addons
 git clone https://github.com/dlopezz/addon_16_odoo.git
 unzip addon_16_odoo/enterprise-16.0.zip -d enterprise-16.0
 
+# Get the RDS endpoint address from Terraform output
+DB_ADDRESS=$(terraform output db_address_1)
+
 # Create Odoo configuration file
 echo "[options]
 admin_passwd = S7wubGONUM4DDuye
 http_port = 8069
-db_host = odoo-test.c3gmqewym3b4.us-east-1.rds.amazonaws.com
+db_host = $DB_ADDRESS
 db_port = 5432
 db_user = odoo
 db_password = MEisaPre2020++
