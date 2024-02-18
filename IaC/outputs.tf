@@ -41,14 +41,9 @@ output "auto_scaling_group_tg_id" {
   value       = aws_alb_target_group.asg_tg.id
 }
 
-output "monitoring_tg_id" {
-  description = "Monitoring EC2, Target Group id (arn)"
-  value       = aws_alb_target_group.monitoring_tg.id
-}
-
 output "alb_listeners_port" {
-  description = "ALB's listening to ports"
-  value       = [ "Port ${aws_alb_listener.asg_listener.port} -> Odoo", "Port ${aws_alb_listener.monitoring_listener.port} -> Grafana" ]
+  description = "ALB's listening to port"
+  value       = "Port ${aws_alb_listener.asg_listener.port} -> Odoo"
 }
 
 # WAF-related outputs
@@ -56,4 +51,3 @@ output "waf_id" {
   description = "Web Application Firewall id"
   value       = aws_wafv2_web_acl.waf.id
 }
-
