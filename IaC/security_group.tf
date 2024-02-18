@@ -6,7 +6,7 @@ module "web_sg" {
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "all-icmp"]
+  ingress_rules       = ["http-80-tcp", "http-8080-tcp", "https-443-tcp", "all-icmp", "grafana-tcp"] // Grafana-TCP = 3000
 
   egress_with_cidr_blocks = [
     {
@@ -36,6 +36,8 @@ module "app_sg" {
       source_security_group_id = module.web_sg.security_group_id
     }
   ]
+  ingress_cidr_blocks = [module.vpc.vpc_cidr_block]
+  ingress_rules       = ["ssh-tcp", "prometheus-node-exporter-http-tcp"] // Ports 22, 9100
 
   egress_with_cidr_blocks = [
     {
@@ -65,6 +67,8 @@ module "data_sg" {
       source_security_group_id = module.app_sg.security_group_id
     }
   ]
+  ingress_cidr_blocks = [module.vpc.vpc_cidr_block]
+  ingress_rules       = ["postgresql-tcp"] // Port 5432
 
   egress_with_cidr_blocks = [
     {

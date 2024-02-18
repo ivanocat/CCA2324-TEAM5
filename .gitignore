@@ -32,3 +32,9 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Ignore providers to avoid terraform backend creation
+providers.tfcd
+
+# This .pem changes on every 'terraform apply'
+pfp-key.pem
