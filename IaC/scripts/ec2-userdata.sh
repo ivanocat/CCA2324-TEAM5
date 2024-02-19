@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Export
+export db_address_ext="${db_address_ext}"
+
 # Update the system
 sudo yum update -y
 
@@ -32,7 +35,7 @@ git clone https://github.com/dlopezz/addon_16_odoo.git
 unzip addon_16_odoo/enterprise-16.0.zip -d enterprise-16.0
 
 # Get the RDS endpoint address from Terraform output
-DB_ADDRESS=$(terraform output db_address_1)
+DB_ADDRESS=$db_address_ext
 
 # Create Odoo configuration file
 echo "[options]

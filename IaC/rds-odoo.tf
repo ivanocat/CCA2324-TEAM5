@@ -8,17 +8,17 @@ resource "aws_security_group" "data_sg" {
   description = "Security group for RDS instance"
   vpc_id      = module.vpc.vpc_id
 
-  // Regla para permitir el tráfico de PostgreSQL desde una dirección IP específica
+  
   ingress {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] // Reemplaza con la dirección IP específica o rango que desees permitir
+    cidr_blocks = ["0.0.0.0/0"] 
   }
 }
 
-resource "aws_db_instance" "postgres_odoo_1" {
-  identifier             = "odoo-db-1"
+resource "aws_db_instance" "postgres_odoo" {
+  identifier             = "odoo-db"
   allocated_storage      = 20
   storage_type           = "gp2"
   engine                 = "postgres"
@@ -33,7 +33,7 @@ resource "aws_db_instance" "postgres_odoo_1" {
 }
 
 output "db_address_1" {
-  value = aws_db_instance.postgres_odoo_1.address
+  value = aws_db_instance.postgres_odoo.address
 }
 
 
