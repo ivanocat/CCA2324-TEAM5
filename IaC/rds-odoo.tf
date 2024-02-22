@@ -22,7 +22,7 @@ resource "aws_db_instance" "postgres_odoo" {
   allocated_storage      = 20
   storage_type           = "gp2"
   engine                 = "postgres"
-  engine_version         = "14.10"
+  engine_version         = "15.5"
   instance_class         = "db.t3.micro"
   username               = "odoo"
   password               = "MEisaPre2020++"
