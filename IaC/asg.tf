@@ -4,6 +4,10 @@ locals {
   }
 }
 
+locals {
+  userdata_script = templatefile("${path.module}/scripts/ec2-userdata.sh", {db_address_ext = aws_db_instance.postgres_odoo.address})
+}
+
 resource "aws_launch_template" "application_lt" {
   name_prefix   = "${var.prefix}-launch-template"
   image_id      = "ami-0a3c3a20c09d6f377" // Amazon Linux 2023 AMI (64-bit (x86), uefi-preferred)
@@ -23,9 +27,13 @@ resource "aws_launch_template" "application_lt" {
     associate_public_ip_address = false
     security_groups             = [module.app_sg.security_group_id]
   }
+ // Detailed depends on
+  depends_on = [aws_db_instance.postgres_odoo]
 
-  user_data = filebase64("./scripts/ec2-userdata.sh")
-}
+  user_data = base64encode(local.userdata_script)
+
+  }
+
 
 resource "aws_autoscaling_group" "application_asg" {
   name                = "${var.prefix}-asg"
