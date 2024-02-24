@@ -3,8 +3,8 @@ resource "aws_alb" "application_load_balancer" {
   internal           = false
   load_balancer_type = "application"
 
-  subnets         = module.vpc.public_subnets
-  security_groups = [module.web_sg.security_group_id]
+  subnets         = var.vpc_public_subnets
+  security_groups = [var.web_sg_id]
 
   tags = {
     Name        = "${var.prefix}-alb"
@@ -15,15 +15,15 @@ resource "aws_alb" "application_load_balancer" {
 }
 
 resource "aws_alb_target_group" "asg_tg" {
-  name_prefix = "asg-"
-  port        = 80
+  name        = "${var.prefix}-asg"
+  port        = "80"
   protocol    = "HTTP"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = var.vpc_id
   target_type = "instance"
 
   health_check {
     path                = "/"
-    port                = 80
+    port                = "80"
     protocol            = "HTTP"
     interval            = 30
     timeout             = 5
@@ -43,7 +43,7 @@ resource "aws_alb_target_group" "asg_tg" {
 
 resource "aws_alb_listener" "asg_listener" {
   load_balancer_arn = aws_alb.application_load_balancer.arn
-  port              = 80
+  port              = "80"
   protocol          = "HTTP"
 
   default_action {

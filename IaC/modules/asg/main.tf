@@ -5,13 +5,13 @@ locals {
 }
 
 locals {
-  userdata_script = templatefile("${path.module}/scripts/ec2-userdata.sh", {db_address_ext = aws_db_instance.postgres_odoo.address})
+  userdata_script = templatefile("${path.module}/scripts/ec2-userdata.sh", {db_address_ext = var.bd_address})
 }
 
 resource "aws_launch_template" "application_lt" {
   name_prefix   = "${var.prefix}-launch-template"
-  image_id      = "ami-0a3c3a20c09d6f377" // Amazon Linux 2023 AMI (64-bit (x86), uefi-preferred)
-  instance_type = "t3.medium"
+  image_id      = var.ami_id
+  instance_type = var.instance_type
 
   // EC2 role
   iam_instance_profile {
@@ -25,22 +25,18 @@ resource "aws_launch_template" "application_lt" {
 
   network_interfaces {
     associate_public_ip_address = false
-    security_groups             = [module.app_sg.security_group_id]
+    security_groups             = [var.app_security_group]
   }
- // Detailed depends on
-  depends_on = [aws_db_instance.postgres_odoo]
 
   user_data = base64encode(local.userdata_script)
-
-  }
-
+}
 
 resource "aws_autoscaling_group" "application_asg" {
-  name                = "${var.prefix}-asg"
-  max_size            = 3
-  min_size            = 1
-  desired_capacity    = 1
-  vpc_zone_identifier = module.vpc.private_subnets
+  name                = var.prefix
+  max_size            = var.max_size
+  min_size            = var.min_size
+  desired_capacity    = var.desired_capacity
+  vpc_zone_identifier = var.vpc_zone_identifier
 
   launch_template {
     id      = aws_launch_template.application_lt.id
@@ -78,5 +74,5 @@ resource "aws_autoscaling_policy" "cpu_scaling_policy" {
 
 resource "aws_autoscaling_attachment" "application_asg_attachment" {
   autoscaling_group_name = aws_autoscaling_group.application_asg.name
-  lb_target_group_arn    = aws_alb_target_group.asg_tg.arn
+  lb_target_group_arn    = var.target_group_arn
 }

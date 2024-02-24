@@ -88,10 +88,3 @@ resource "aws_wafv2_web_acl" "waf" {
     Project     = "CCA2324-PFP"
   }
 }
-
-resource "aws_wafv2_web_acl_association" "waf-association" {
-  resource_arn = aws_alb.application_load_balancer.arn
-  web_acl_arn  = aws_wafv2_web_acl.waf.arn
-
-  depends_on = [aws_alb.application_load_balancer]
-}
