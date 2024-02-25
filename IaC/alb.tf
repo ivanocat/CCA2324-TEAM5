@@ -29,6 +29,7 @@ resource "aws_alb_target_group" "asg_tg" {
     timeout             = 5
     healthy_threshold   = 2
     unhealthy_threshold = 2
+    matcher             = "200,303"
   }
 
   load_balancing_algorithm_type = "round_robin"

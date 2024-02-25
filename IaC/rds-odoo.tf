@@ -1,19 +1,12 @@
 resource "aws_db_subnet_group" "subnet_bd" {
   name       = "rds-db-subnet-group"
   subnet_ids = [module.vpc.database_subnets[0], module.vpc.database_subnets[1]]
-}
-
-resource "aws_security_group" "data_sg" {
-  name        = "data-sg"
-  description = "Security group for RDS instance"
-  vpc_id      = module.vpc.vpc_id
-
   
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] 
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+    Owner       = "Team 5"
+    Project     = "CCA2324-PFP"
   }
 }
 
@@ -27,9 +20,16 @@ resource "aws_db_instance" "postgres_odoo" {
   username               = "odoo"
   password               = "MEisaPre2020++"
   db_subnet_group_name   = aws_db_subnet_group.subnet_bd.name
-  multi_az               = true   
-  vpc_security_group_ids = [aws_security_group.data_sg.id]
+  multi_az               = true
+  vpc_security_group_ids = [module.data_sg.security_group_id]
   skip_final_snapshot    = true
+
+  tags = {
+    Terraform   = "true"
+    Environment = "dev"
+    Owner       = "Team 5"
+    Project     = "CCA2324-PFP"
+  }
 }
 
 output "db_address_1" {
