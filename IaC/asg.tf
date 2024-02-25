@@ -5,7 +5,7 @@ locals {
 }
 
 locals {
-  userdata_script = templatefile("${path.module}/scripts/ec2-userdata.sh", {db_address_ext = aws_db_instance.postgres_odoo.address})
+  userdata_script = templatefile("${path.module}/scripts/ec2-userdata.sh", { db_address_ext = aws_db_instance.postgres_odoo.address })
 }
 
 resource "aws_launch_template" "application_lt" {
@@ -27,12 +27,12 @@ resource "aws_launch_template" "application_lt" {
     associate_public_ip_address = false
     security_groups             = [module.app_sg.security_group_id]
   }
- // Detailed depends on
-  depends_on = [aws_db_instance.postgres_odoo]
 
   user_data = base64encode(local.userdata_script)
 
-  }
+  // Detailed depends on
+  depends_on = [aws_db_instance.postgres_odoo]
+}
 
 
 resource "aws_autoscaling_group" "application_asg" {
