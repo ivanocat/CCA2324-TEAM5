@@ -26,7 +26,7 @@ scrape_configs:
         filters:
           - name: tag:Name
             values:
-              - pfp-asg
+              - primary-asg
 EOF
 sudo cp prometheus.yml /etc/prometheus/prometheus.yml
 rm prometheus.yml
