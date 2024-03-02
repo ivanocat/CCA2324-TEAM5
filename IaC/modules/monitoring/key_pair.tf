@@ -9,8 +9,8 @@ resource "aws_key_pair" "kp" {
 
   provisioner "local-exec" { # Create a .pem file to your computer!!
     command = <<-EOT
-      echo '${tls_private_key.pk.private_key_pem}' > ./secrets/${self.key_name}.pem
-      chmod 400 ./secrets/'${self.key_name}.pem'
+      echo '${tls_private_key.pk.private_key_pem}' > ${var.secrets_path}/${self.key_name}.pem
+      chmod 400 ${var.secrets_path}/${self.key_name}.pem
     EOT
   }
 }

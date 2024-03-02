@@ -1,10 +1,10 @@
-module "vpc" {
+module "secondary_vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "${var.prefix}-vpc"
-  cidr = "172.31.0.0/16"
+  name = "${var.prefix}-secondary-vpc"
+  cidr = var.secondary_vpc_cidr
 
-  azs              = ["${var.region}a", "${var.region}b"]
+  azs              = ["${var.secondary_region}a", "${var.secondary_region}b"]
   public_subnets   = ["172.31.1.0/24", "172.31.2.0/24"]
   private_subnets  = ["172.31.11.0/24", "172.31.12.0/24"]
   database_subnets = ["172.31.21.0/24", "172.31.22.0/24"]
@@ -24,10 +24,10 @@ module "vpc" {
   }
 
   igw_tags = {
-    Name = "${var.prefix}-igw"
+    Name = "${var.prefix}-secondary-igw"
   }
 
   nat_gateway_tags = {
-    Name = "${var.prefix}-natgw"
+    Name = "${var.prefix}-secondary-natgw"
   }
 }
