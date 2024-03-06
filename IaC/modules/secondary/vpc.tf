@@ -5,11 +5,9 @@ module "secondary_vpc" {
   cidr = var.secondary_vpc_cidr
 
   azs              = ["${var.secondary_region}a", "${var.secondary_region}b"]
-  public_subnets   = ["172.31.1.0/24", "172.31.2.0/24"]
+  public_subnets   = ["172.31.1.0/24", "172.31.2.0/24"] // Implies Internet Gateway creation
   private_subnets  = ["172.31.11.0/24", "172.31.12.0/24"]
   database_subnets = ["172.31.21.0/24", "172.31.22.0/24"]
-
-  enable_vpn_gateway = true
 
   // One NAT Gateway per AZ
   enable_nat_gateway     = true
