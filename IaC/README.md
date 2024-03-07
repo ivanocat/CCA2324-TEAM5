@@ -29,8 +29,16 @@ If not done previously, create a remote backend for the Terraform state locking 
     terraform apply -auto-approve
 ```
 
+## Domain created (may not work in future)
 
-## Expected infrastructure
-The following image shows the infrastructure that comprises the project:
+Follow this link to load the application: [http://pfp-team5.com](http://pfp-team5.com)
 
-![Infrastructure of the project](../images/Infrastructure.drawio.png "Infrastructure of the project")
+## Infrastructure
+
+This is the core insfrastructure in the main region:
+
+![Core infrastructure](../images/core%20infrastructure.png "Core infrastructure")
+
+And this is the complete infrastructure, based on a Disaster Recovery plan:
+
+![Disaster recovery infrastructure](../images/disaster-recovery-pilot-light.png "Disaster recovery infrastructure")

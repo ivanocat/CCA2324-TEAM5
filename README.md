@@ -1,20 +1,15 @@
-# CCA2324-TEAM5
+# CCA2324-TEAM5 PFP
 
-## Members:
-Xavier González Mur: xgonzalezmur@gmail.com
+We (Team 5) proudly present the source code repository of the "Cloud Computing Architecture" Postgraduate Final Project, carried out between October 4, 2023 and February 28, 2024.
 
-Ivan Margarit Sanchez: ivano.es@gmail.com
+* Team 5's members:
 
-Diego Lopez Alcivar: dlopezes7@gmail.com
+  * Xavier González Mur
+  * Ivan Margarit Sanchez
+  * Diego Lopez Alcivar
+  * Adrià Feria López
 
-Adrià Feria López: adri.gp7@gmail.com
+* :bulb: **Tutor:** Santos Pardos
 
+Click [here](./IaC/README.md) for further information.
 
-## Domain:
-CCA2324-TEAM5.WORK.GD
-
-## Infrastructure
-
-[INFRA](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=https%3A%2F%2Fapp.diagrams.net%2F%23G1drOOFoN3R3L7oZiPL5Z5WQoxuLKBlr6f&layers=1&nav=1#G1drOOFoN3R3L7oZiPL5Z5WQoxuLKBlr6f)
-
-[ALB-ASG](https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=https%3A%2F%2Fapp.diagrams.net%2F%23G17hlezN1v9MX55srJHWCWUZ73_ccxkaAH&layers=1&nav=1#G17hlezN1v9MX55srJHWCWUZ73_ccxkaAH)
