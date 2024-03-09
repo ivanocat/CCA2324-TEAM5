@@ -1,6 +1,10 @@
 locals {
   asg_tags = {
-    Name = "${var.prefix}-asg"
+    Name        = "${var.prefix}-asg"
+    Terraform   = "true"
+    Environment = "dev"
+    Owner       = "Team 5"
+    Project     = "CCA2324-PFP"
   }
 }
 
@@ -28,7 +32,8 @@ resource "aws_launch_template" "application_lt" {
     security_groups             = [var.app_security_group]
   }
 
-  user_data  = base64encode(local.userdata_script)
+  user_data = base64encode(local.userdata_script)
+
   depends_on = [var.rds_dependency] //[aws_db_instance.postgres_odoo]
 }
 

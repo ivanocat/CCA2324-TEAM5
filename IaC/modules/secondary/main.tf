@@ -1,5 +1,14 @@
 provider "aws" {
   region = var.region
+
+  default_tags {
+    tags = {
+      Terraform   = "true"
+      Environment = "dev"
+      Owner       = "Team 5"
+      Project     = "CCA2324-PFP"
+    }
+  }
 }
 
 module "secondary_alb" {
@@ -32,7 +41,7 @@ module "secondary_ec2_monitoring" {
   vpc_id            = module.secondary_vpc.vpc_id
   vpc_public_subnet = module.secondary_vpc.public_subnets[0]
   secrets_path      = "${path.module}/secrets"
-  ec2_name = "secondary-asg"
+  ec2_name          = "secondary-asg"
 }
 
 module "seconday_waf" {
