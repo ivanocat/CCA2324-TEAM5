@@ -41,7 +41,7 @@ module "ec2-monitoring" {
   associate_public_ip_address = true
   iam_instance_profile        = var.lab_instance_role
 
-  user_data  = base64encode(local.userdata_script)
+  user_data = base64encode(local.userdata_script)
 
   tags = {
     Name        = "${var.prefix}-monitoring"

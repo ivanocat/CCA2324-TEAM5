@@ -16,9 +16,6 @@ resource "aws_db_instance" "postgres_odoo_replica" {
 
   tags = {
     Name        = "odoo-db-replica"
-    Environment = "dev"
-    Owner       = "Team 5"
-    Project     = "CCA2324-PFP"
   }
 }
 

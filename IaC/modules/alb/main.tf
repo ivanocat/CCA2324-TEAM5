@@ -8,7 +8,8 @@ resource "aws_alb" "application_load_balancer" {
 
   tags = {
     Name        = "${var.prefix}-alb"
-    Environment = "dev",
+    Terraform   = "true"
+    Environment = "dev"
     Owner       = "Team 5"
     Project     = "CCA2324-PFP"
   }
@@ -43,8 +44,9 @@ resource "aws_alb_target_group" "asg_tg" {
 
   tags = {
     Name        = "${var.prefix}-asg-tg"
-    Environment = "dev",
-    Owner       = "Team 5",
+    Terraform   = "true"
+    Environment = "dev"
+    Owner       = "Team 5"
     Project     = "CCA2324-PFP"
   }
 }

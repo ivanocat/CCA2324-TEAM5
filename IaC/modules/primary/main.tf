@@ -1,5 +1,14 @@
 provider "aws" {
   region = var.region
+
+  default_tags {
+    tags = {
+      Terraform   = "true"
+      Environment = "dev"
+      Owner       = "Team 5"
+      Project     = "CCA2324-PFP"
+    }
+  }
 }
 
 module "primary_alb" {
@@ -32,7 +41,7 @@ module "primary-ec2-monitoring" {
   vpc_id            = module.primary_vpc.vpc_id
   vpc_public_subnet = module.primary_vpc.public_subnets[0]
   secrets_path      = "${path.module}/secrets"
-  ec2_name = "primary-asg"
+  ec2_name          = "primary-asg"
 }
 
 module "primary_waf" {
