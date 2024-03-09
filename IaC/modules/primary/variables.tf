@@ -30,7 +30,7 @@ variable "primary_vpc_cidr" {
 
 variable "primary_instance_ami" {
   description = "ID de la AMI para la instancia principal de la VPC primaria"
-  default     = "ami-0e731c8a588258d0d"
+  default     = "ami-0e731c8a588258d0d" // Amazon Linux 2023 AMI 2023.3.20240205.2 x86_64 HVM kernel-6.1
   type        = string
 }
 

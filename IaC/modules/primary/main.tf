@@ -37,7 +37,7 @@ module "primary-ec2-monitoring" {
   prefix            = "primary"
   source            = "../../modules/monitoring"
   intance_type      = "t3.medium"
-  intance_ami       = "ami-0c7217cdde317cfec"
+  intance_ami       = "ami-0c7217cdde317cfec" // Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2023-12-07
   vpc_id            = module.primary_vpc.vpc_id
   vpc_public_subnet = module.primary_vpc.public_subnets[0]
   secrets_path      = "${path.module}/secrets"
